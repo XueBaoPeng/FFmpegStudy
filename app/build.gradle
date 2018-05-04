@@ -2,6 +2,10 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
+    buildToolsVersion "27.0.3"
+    dataBinding {
+        enabled true
+    }
     defaultConfig {
         applicationId "com.xbp.ffmpeg.ffmpegstudy"
         minSdkVersion 15
@@ -13,14 +17,24 @@ android {
             cmake {
                 cppFlags ""
             }
+            ndk {
+                abiFilters "armeabi"
+            }
         }
     }
+
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        abortOnError false
+    }
+
     externalNativeBuild {//使用cmake脚本编译c代码
         cmake {
             path "CMakeLists.txt"
