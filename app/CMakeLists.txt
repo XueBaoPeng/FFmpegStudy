@@ -115,11 +115,25 @@ add_library( # Sets the name of the library.
              # Provides a relative path to your source file(s).
              src/main/cpp/native-lib.cpp )
 
+add_library( # Sets the name of the library.
+             filtering_audio
+
+             # Sets the library as a shared library.
+             SHARED
+
+             # Provides a relative path to your source file(s).
+             src/main/cpp/ffmpeg_examples/filtering_audio.cpp )
+
 #一般外面引入的库文件需要头文件
-include_directories(libs/include)
+
+include_directories(libs/ffmpeg)
 
 #关联引入库的文件和需要编译的native-lib
-target_include_directories(native-lib PRIVATE libs/include)
+target_include_directories(native-lib PRIVATE libs/ffmpeg)
+
+#关联引入库的文件和需要编译的filtering_audio
+target_include_directories(filtering_audio PRIVATE libs/ffmpeg)
+
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
